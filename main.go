@@ -37,6 +37,8 @@ func handleConnection(connTcp net.Conn, socket string) {
 	connUnix, err := net.Dial("unix", socket)
 	if err != nil {
 		log.Printf("Failed to connect to socket \"%s\": %s", socket, err.Error())
+		connTcp.Close()
+		return
 	}
 
 	log.Println("Accepted client")
